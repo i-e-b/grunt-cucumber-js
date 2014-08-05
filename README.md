@@ -1,8 +1,11 @@
-# grunt-cucumber-js
+# grunt-cucumber-sigma
 
-> Run all your cucumber features through Grunt.
+Simple and easy way to run your cucumber scripts from Grunt.
 
-**Warning:** This task requires a Grunt version of at least `0.4.0`.
+__NOTE__ This is a fork of `https://www.npmjs.org/package/grunt-cucumber` which appears to have gone stale.
+
+This updated repo is available through `npm install grunt-cucumber-sigma`.
+The only change in this repo is to require later versions of the official Cucumber repo, which include updated features and bug fixes.
 
 
 ## Getting Started
