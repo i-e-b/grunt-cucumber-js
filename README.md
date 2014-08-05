@@ -110,6 +110,11 @@ grunt.initConfig({
 });
 ```
 
+## Getting started with Cucumber
+See
+* https://github.com/cucumber/cucumber/wiki/Gherkin
+* https://www.npmjs.org/package/cucumber 
+
 ## Bugs
 
 Help us squash them by submitting an issue that describes how you encountered it; please be as specific as possible including operating system, node, grunt, and grunt-cucumber-js versions.
