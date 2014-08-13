@@ -10,6 +10,7 @@ module.exports = function (grunt) {
 
     var steps = options.steps;
     var tags = options.tags;
+    var stackFormat = options.stackFormat
     var format = options.format;
     var modulePath = options.modulePath;
     var coffee = options.coffee;
@@ -48,7 +49,12 @@ module.exports = function (grunt) {
       execOptions = execOptions.concat(files);
     }
 
-    if (! _.isEmpty(steps)) {
+      if (!_.isEmpty(stackFormat)) {
+          execOptions.push('-s');
+          execOptions.push(stackFormat);
+      }
+
+      if (! _.isEmpty(steps)) {
       execOptions.push('-r');
       execOptions.push(steps);
     }
