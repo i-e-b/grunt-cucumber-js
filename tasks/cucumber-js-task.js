@@ -1,86 +1,172 @@
 module.exports = function (grunt) {
 
-  // The Cucumber Task
-  grunt.registerMultiTask('cucumberjs', 'Runs cucumber.js', function () {
-    // Make this task async
-    var done = this.async();
+    // The Cucumber Task
+    grunt.registerMultiTask('cucumberjs', 'Runs cucumber.js', function () {
+        // Make this task async
+        var done = this.async();
 
-    // Load all the options
-    var options = this.options();
+        // Load all the options
+        var options = this.options();
 
-    var steps = options.steps;
-    var tags = options.tags;
-    var stackFormat = options.stackFormat
-    var format = options.format;
-    var modulePath = options.modulePath;
-    var coffee = options.coffee;
+        var steps = options.steps;
+        var tags = options.tags;
+        var stackFormat = options.stackFormat
+        var format = options.format;
+        var modulePath = options.modulePath;
+        var coffee = options.coffee;
 
-    grunt.verbose.writeflags(options, 'Options');
+        grunt.verbose.writeflags(options, 'Options');
 
-    var callback = function(succeeded) {
-      var exitFunction = function() {
-        done(succeeded);
-      };
+        var callback = function (succeeded) {
+            var exitFunction = function () {
+                done(succeeded);
+            };
 
-      // --- exit after waiting for all pending output ---
-      var waitingIO = false;
-      process.stdout.on('drain', function() {
-        if (waitingIO) {
-          // the kernel buffer is now empty
-          exitFunction();
+            // --- exit after waiting for all pending output ---
+            var waitingIO = false;
+            module.exports = function (grunt) {
+
+                // The Cucumber Task
+                grunt.registerMultiTask('cucumberjs', 'Runs cucumber.js', function () {
+                    // Make this task async
+                    var done = this.async();
+
+                    // Load all the options
+                    var options = this.options();
+
+                    var steps = options.steps;
+                    var tags = options.tags;
+                    var format = options.format;
+                    var useShortStackTraces = options.useShortStackTraces;
+                    var modulePath = options.modulePath;
+                    var coffee = options.coffee;
+
+                    grunt.verbose.writeflags(options, 'Options');
+
+                    var callback = function (succeeded) {
+                        var exitFunction = function () {
+                            done(succeeded);
+                        };
+
+                        // --- exit after waiting for all pending output ---
+                        var waitingIO = false;
+                        process.stdout.on('drain', function () {
+                            if (waitingIO) {
+                                // the kernel buffer is now empty
+                                exitFunction();
+                            }
+                        });
+                        if (process.stdout.write("")) {
+                            // no buffer left, exit now:
+                            exitFunction();
+                        } else {
+                            // write() returned false, kernel buffer is not empty yet...
+                            waitingIO = true;
+                        }
+                    };
+
+                    var files = this.filesSrc;
+
+
+                    var execOptions = ['node', 'node_modules/.bin/cucumber-js'];
+
+                    var _ = grunt.util._;
+                    if (!_.isEmpty(files)) {
+                        execOptions = execOptions.concat(files);
+                    }
+
+                    if (!_.isEmpty(steps)) {
+                        execOptions.push('-r');
+                        execOptions.push(steps);
+                    }
+
+                    if (!_.isEmpty(tags)) {
+                        execOptions.push('-t');
+                        execOptions.push(tags);
+                    }
+
+                    if (useShortStackTraces) {
+                        execOptions.push('--shortStackTraces');
+                    }
+
+                    if (!_.isEmpty(format)) {
+                        execOptions.push('-f');
+                        execOptions.push(format);
+                    }
+
+                    if (coffee) {
+                        execOptions.push('--coffee');
+                    }
+
+                    var cucumberPath = 'cucumber';
+                    if (!_.isEmpty(modulePath)) {
+                        cucumberPath = modulePath;
+                    }
+
+                    grunt.verbose.writeln('Exec Options: ' + execOptions.join(' '));
+                    var cucumber = require(cucumberPath);
+                    cucumber.Cli(execOptions).run(callback);
+
+                });
+            };
+
+            process.stdout.on('drain', function () {
+                if (waitingIO) {
+                    // the kernel buffer is now empty
+                    exitFunction();
+                }
+            });
+            if (process.stdout.write("")) {
+                // no buffer left, exit now:
+                exitFunction();
+            } else {
+                // write() returned false, kernel buffer is not empty yet...
+                waitingIO = true;
+            }
+        };
+
+        var files = this.filesSrc;
+
+
+        var execOptions = ['node', 'node_modules/.bin/cucumber-js'];
+
+        var _ = grunt.util._;
+        if (!_.isEmpty(files)) {
+            execOptions = execOptions.concat(files);
         }
-      });
-      if (process.stdout.write("")) {
-        // no buffer left, exit now:
-        exitFunction();
-      } else {
-        // write() returned false, kernel buffer is not empty yet...
-        waitingIO = true;
-      }
-    };
 
-    var files = this.filesSrc;
+        if (!_.isEmpty(stackFormat)) {
+            execOptions.push('-s');
+            execOptions.push(stackFormat);
+        }
 
+        if (!_.isEmpty(steps)) {
+            execOptions.push('-r');
+            execOptions.push(steps);
+        }
 
-    var execOptions = ['node', 'node_modules/.bin/cucumber-js'];
+        if (!_.isEmpty(tags)) {
+            execOptions.push('-t');
+            execOptions.push(tags);
+        }
 
-    var _ = grunt.util._;
-    if (! _.isEmpty(files)) {
-      execOptions = execOptions.concat(files);
-    }
+        if (!_.isEmpty(format)) {
+            execOptions.push('-f');
+            execOptions.push(format);
+        }
 
-      if (!_.isEmpty(stackFormat)) {
-          execOptions.push('-s');
-          execOptions.push(stackFormat);
-      }
+        if (coffee) {
+            execOptions.push('--coffee');
+        }
 
-      if (! _.isEmpty(steps)) {
-      execOptions.push('-r');
-      execOptions.push(steps);
-    }
+        var cucumberPath = 'cucumber';
+        if (!_.isEmpty(modulePath)) {
+            cucumberPath = modulePath;
+        }
 
-    if (! _.isEmpty(tags)) {
-      execOptions.push('-t');
-      execOptions.push(tags);
-    }
+        grunt.verbose.writeln('Exec Options: ' + execOptions.join(' '));
+        var cucumber = require(cucumberPath);
+        cucumber.Cli(execOptions).run(callback);
 
-    if (! _.isEmpty(format)) {
-      execOptions.push('-f');
-      execOptions.push(format);
-    }
-
-    if (coffee) {
-      execOptions.push('--coffee');
-    }
-
-    var cucumberPath = 'cucumber';
-    if (! _.isEmpty(modulePath)) {
-      cucumberPath = modulePath;
-    }
-
-    grunt.verbose.writeln('Exec Options: ' + execOptions.join(' '));
-    var cucumber = require(cucumberPath);
-    cucumber.Cli(execOptions).run(callback);
-
-  });
+    });
 };
