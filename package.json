@@ -1,7 +1,7 @@
 {
   "name": "grunt-cucumber-sigma",
   "description": "Grunt task for running Cucumber.js",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/i-e-b/grunt-cucumber-js",
   "author": {
     "name": "Iain Ballard",
@@ -26,7 +26,7 @@
   },
   "scripts": {},
   "dependencies": {
-      "cucumber": "git+https://AndrewJohnBenjamin@github.com/AndrewJohnBenjamin/cucumber-js"
+      "cucumber-sigma": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.0",
@@ -37,6 +37,7 @@
     "grunt",
     "plugins",
     "builds",
-    "ci"
+    "ci",
+    "cucumber"
   ]
 }
