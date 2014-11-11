@@ -72,7 +72,7 @@ module.exports = function (grunt) {
             execOptions.push('--coffee');
         }
 
-        var cucumberPath = 'cucumber';
+        var cucumberPath = 'cucumber-sigma';
         if (! _.isEmpty(modulePath)) {
             cucumberPath = modulePath;
         }
