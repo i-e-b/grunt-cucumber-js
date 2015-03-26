@@ -11,6 +11,7 @@ module.exports = function (grunt) {
         var steps = options.steps;
         var tags = options.tags;
         var useShortStackTraces = options.useShortStackTraces;
+        var unusedSteps = options.unusedSteps;
         var format = options.format;
         var modulePath = options.modulePath;
         var coffee = options.coffee;
@@ -51,6 +52,10 @@ module.exports = function (grunt) {
 
         if (useShortStackTraces) {
             execOptions.push('--shortStackTraces');
+        }
+
+        if (unusedSteps) {
+            execOptions.push('--unusedSteps');
         }
 
         if (! _.isEmpty(steps)) {
