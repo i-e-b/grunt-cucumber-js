@@ -64,8 +64,10 @@ module.exports = function (grunt) {
         }
 
         if (! _.isEmpty(tags)) {
-            execOptions.push('-t');
-            execOptions.push(tags);
+            tags.split(';').forEach( function (item) {
+              execOptions.push('-t');
+              execOptions.push(item);
+            });
         }
 
         if (! _.isEmpty(format)) {

@@ -1,4 +1,7 @@
 # Changelog
+## v 0.3.4
+* Added logical and operation to tags
+
 ## v 0.2.3
 * Fixed 'executable' rename to 'modulePath'
 

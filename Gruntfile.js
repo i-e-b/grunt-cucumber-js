@@ -12,7 +12,8 @@ module.exports = function (grunt) {
       files: 'features',
       options: {
         steps: 'features/step_definitions',
-        format: 'pretty'
+        format: 'pretty',
+        tags: '~@dontrun1;~@dontrun2;@dorun,@anotherdorun'
       }
     }
   });
