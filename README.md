@@ -61,6 +61,9 @@ this represents boolean NOT. Example:
 by a comma, which represents logical OR. Example:
 `tags: '@dev,@wip'`
 
+Also, you can separate tags with semicolon to represent logic AND. Example:
+`tags: '~@dontrunthis;@dontrunthiseither'` 
+
 #### format
 Type: `String`
 
