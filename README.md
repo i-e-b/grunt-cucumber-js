@@ -43,7 +43,7 @@ when this option is specified, and all loading becomes explicit.
 Files under directories named "support" are always loaded first.
 
 #### tags
-Type: `String`
+Type: `String|Array`
 
 Default: `''`
 
@@ -60,6 +60,11 @@ this represents boolean NOT. Example:
  A tag expression can have several tags separated
 by a comma, which represents logical OR. Example:
 `tags: '@dev,@wip'`
+
+A tag expression can have an array of tags to be applied,
+this represents a logical AND. Example:
+
+`tags: ['@dev',@wip]`
 
 #### format
 Type: `String`
