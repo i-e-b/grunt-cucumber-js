@@ -1,4 +1,8 @@
 # Changelog
+
+## v0.3.4
+* Added support specifying multiple tags in an array
+
 ## v 0.2.3
 * Fixed 'executable' rename to 'modulePath'
 

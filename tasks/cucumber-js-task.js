@@ -63,9 +63,13 @@ module.exports = function (grunt) {
             execOptions.push(steps);
         }
 
-        if (! _.isEmpty(tags)) {
-            execOptions.push('-t');
-            execOptions.push(tags);
+        if (! _.isEmpty(tags)) 
+		{
+			var allTags = [].concat(tags);
+			
+			allTags.forEach(t => {
+				execOptions.push('-t', t);
+			});
         }
 
         if (! _.isEmpty(format)) {
