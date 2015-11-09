@@ -8,13 +8,14 @@ module.exports = function (grunt) {
         // Load all the options
         var options = this.options();
 
-        var steps = options.steps;
-        var tags = options.tags;
+        var steps = grunt.option('steps') || options.steps;
+        var tags = grunt.option('tags') || options.tags;
         var useShortStackTraces = options.useShortStackTraces;
         var unusedSteps = options.unusedSteps;
-        var format = options.format;
+        var format = grunt.option('format') || options.format;
         var modulePath = options.modulePath;
         var coffee = options.coffee;
+        var colors = grunt.option('nocolor') || options.nocolor;
 
         grunt.verbose.writeflags(options, 'Options');
 
@@ -57,6 +58,10 @@ module.exports = function (grunt) {
         if (unusedSteps) {
             execOptions.push('--unusedSteps');
         }
+        
+        if (nocolor) {
+            execOptions.push('--no-colors');
+        }
 
         if (! _.isEmpty(steps)) {
             execOptions.push('-r');
@@ -67,7 +72,7 @@ module.exports = function (grunt) {
 		{
 			var allTags = [].concat(tags);
 			
-			allTags.forEach(t => {
+			allTags.forEach(function (t) {
 				execOptions.push('-t', t);
 			});
         }
