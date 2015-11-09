@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         var format = grunt.option('format') || options.format;
         var modulePath = options.modulePath;
         var coffee = options.coffee;
-        var colors = grunt.option('nocolor') || options.nocolor;
+        var nocolor = grunt.option('nocolor') || options.nocolor;
 
         grunt.verbose.writeflags(options, 'Options');
 
